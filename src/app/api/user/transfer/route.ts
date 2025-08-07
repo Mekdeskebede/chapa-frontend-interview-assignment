@@ -6,7 +6,7 @@ export async function POST(req: NextRequest) {
     const chapaRes = await fetch("https://api.chapa.co/v1/transfers", {
         method: "POST",
         headers: {
-            Authorization: `Bearer ${secretKey}`,
+            Authorization: `Bearer ${process.env.CHAPA_SECRET_KEY}`,
             "Content-Type": "application/json",
         },
         body: JSON.stringify(body),

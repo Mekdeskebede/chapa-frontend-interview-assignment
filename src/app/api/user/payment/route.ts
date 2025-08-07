@@ -9,7 +9,7 @@ export async function POST(req: NextRequest) {
         {
             method: "POST",
             headers: {
-                Authorization: `Bearer ${secretKey}`,
+                Authorization: `Bearer ${process.env.CHAPA_SECRET_KEY}`,
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(body),

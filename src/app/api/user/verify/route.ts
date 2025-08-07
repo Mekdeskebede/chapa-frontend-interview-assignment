@@ -9,7 +9,7 @@ export async function POST(req: NextRequest) {
         {
             method: "GET",
             headers: {
-                Authorization: `Bearer ${secretKey}`,
+                Authorization: `Bearer ${process.env.CHAPA_SECRET_KEY}`,
                 "Content-Type": "application/json",
             },
         }
