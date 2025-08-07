@@ -2,7 +2,13 @@ import React, { useEffect, useState } from "react";
 import { fetchAdminUsers } from "@/services/adminService";
 
 export default function AdminUserTable() {
-    const [users, setUsers] = useState<any[]>([]);
+    interface User {
+        id: number;
+        name: string;
+        totalPayments: number;
+        active: boolean;
+    }
+    const [users, setUsers] = useState<User[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
 

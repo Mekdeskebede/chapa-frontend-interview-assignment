@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(req: NextRequest) {
+export async function GET() {
     const secretKey = process.env.CHAPA_SECRET_KEY;
     const chapaRes = await fetch("https://api.chapa.co/v1/banks", {
         method: "GET",

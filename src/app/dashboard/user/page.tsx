@@ -13,14 +13,7 @@ export default function UserDashboard() {
         if (role !== "user") {
             router.push("/login");
         }
-    }, [router]);
-
-    // Example user info, replace with real data as needed
-    const userInfo = {
-        name: "John Doe",
-        email: "john.doe@email.com",
-        account: "**** 1234",
-    };
+    }, [router]); 
 
     return (
         <div className="flex min-h-screen">

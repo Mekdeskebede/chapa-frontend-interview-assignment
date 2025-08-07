@@ -6,7 +6,7 @@ import Input from "../../components/Input";
 import Button from "../../components/Button";
 import { User, Lock } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function LoginPage() {
@@ -52,6 +52,7 @@ export default function LoginPage() {
         } catch (err) {
             setError("Something went wrong");
             toast.error("Something went wrong");
+            console.log(err)
         } finally {
             setLoading(false);
         }

@@ -9,7 +9,14 @@ import {
 } from "lucide-react";
 
 export default function RecentTransactions() {
-    const [transactions, setTransactions] = useState<any[]>([]);
+    interface Transaction {
+        id: number;
+        type: string;
+        amount: number;
+        status: string;
+        date: string;
+    }
+    const [transactions, setTransactions] = useState<Transaction[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
 

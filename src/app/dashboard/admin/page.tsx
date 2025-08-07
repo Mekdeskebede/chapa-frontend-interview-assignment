@@ -14,7 +14,7 @@ export default function AdminDashboard() {
         }
     }, [router]);
 
-    const handleToggle = (id: number) => {
+    const handleToggle = () => {
         // Optionally handle toggle logic here (e.g., API call)
     };
 

@@ -10,7 +10,6 @@ import {
     removeAdminUser,
     fetchAdminList,
 } from "@/services/superAdminService";
-import Button from "@/components/Button";
 
 export default function SuperAdminDashboard() {
     const router = useRouter();
@@ -24,7 +23,11 @@ export default function SuperAdminDashboard() {
     const [adminName, setAdminName] = useState("");
     const [addFeedback, setAddFeedback] = useState("");
     const [showAddModal, setShowAddModal] = useState(false);
-    const [admins, setAdmins] = useState<any[]>([]);
+    interface Admin {
+        id: number;
+        name: string;
+    }
+    const [admins, setAdmins] = useState<Admin[]>([]);
     const [loadingAdmins, setLoadingAdmins] = useState(true);
     const [errorAdmins, setErrorAdmins] = useState("");
     const [removeFeedback, setRemoveFeedback] = useState("");
@@ -283,8 +286,7 @@ export default function SuperAdminDashboard() {
                         </div>
                     )}
                     <div className="w-[50%] mt-12">
-
-                <TransferSection />
+                        <TransferSection />
                     </div>
                 </div>
             </div>

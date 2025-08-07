@@ -13,8 +13,20 @@ export async function fetchRecentTransactions() {
     const data = await res.json();
     return data.transactions;
 }
+// Payment data type for API integration
+interface PaymentData {
+    amount: number | string;
+    currency: string;
+    email: string;
+    first_name: string;
+    last_name: string;
+    tx_ref: string;
+    callback_url: string;
+    // Add other fields as needed
+}
+
 // Real payment service for API integration
-export async function initializePayment(paymentData: any) {
+export async function initializePayment(paymentData: PaymentData) {
     const res = await fetch("/api/user/payment", {
         method: "POST",
         headers: { "Content-Type": "application/json" },

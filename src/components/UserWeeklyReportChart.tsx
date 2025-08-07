@@ -21,6 +21,13 @@ ChartJS.register(
     Legend
 );
 
+interface Transaction {
+    id: string;
+    date: string;
+    type: "Deposit" | "Withdrawal";
+    amount: number;
+}
+
 const options = {
     responsive: true,
     plugins: {
@@ -36,13 +43,22 @@ async function fetchWeeklyTransactions() {
 }
 
 export default function UserWeeklyReportChart() {
-    const [chartData, setChartData] = useState<any>(null);
+    const [chartData, setChartData] = useState<{
+        labels: string[];
+        datasets: {
+            label: string;
+            data: number[];
+            borderColor: string;
+            backgroundColor: string;
+            tension: number;
+        }[];
+    } | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
 
     useEffect(() => {
         fetchWeeklyTransactions()
-            .then((txs) => {
+            .then((txs: Transaction[]) => {
                 // Group by date and type
                 const days = [
                     "2025-08-01",
@@ -56,18 +72,16 @@ export default function UserWeeklyReportChart() {
                 const deposits = days.map((day) =>
                     txs
                         .filter(
-                            (tx: any) =>
-                                tx.date === day && tx.type === "Deposit"
+                            (tx) => tx.date === day && tx.type === "Deposit"
                         )
-                        .reduce((sum: number, tx: any) => sum + tx.amount, 0)
+                        .reduce((sum: number, tx) => sum + tx.amount, 0)
                 );
                 const withdrawals = days.map((day) =>
                     txs
                         .filter(
-                            (tx: any) =>
-                                tx.date === day && tx.type === "Withdrawal"
+                            (tx) => tx.date === day && tx.type === "Withdrawal"
                         )
-                        .reduce((sum: number, tx: any) => sum + tx.amount, 0)
+                        .reduce((sum: number, tx) => sum + tx.amount, 0)
                 );
                 setChartData({
                     labels: days.map((day) =>
@@ -106,9 +120,9 @@ export default function UserWeeklyReportChart() {
                 <p className="text-primary">Loading weekly report...</p>
             ) : error ? (
                 <p className="text-red-500">{error}</p>
-            ) : (
+            ) : chartData ? (
                 <Line data={chartData} options={options} />
-            )}
+            ) : null}
         </div>
     );
 }

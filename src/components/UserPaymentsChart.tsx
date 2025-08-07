@@ -29,7 +29,13 @@ const options = {
 };
 
 export default function UserPaymentsChart() {
-    const [users, setUsers] = useState<any[]>([]);
+    interface User {
+        id: number;
+        name: string;
+        totalPayments: number;
+        active: boolean;
+    }
+    const [users, setUsers] = useState<User[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
 
@@ -71,7 +77,7 @@ export default function UserPaymentsChart() {
             ) : error ? (
                 <p className="text-red-500">{error}</p>
             ) : (
-                <div style={{ width: "100%", minWidth:"500px" }}>
+                <div style={{ width: "100%", minWidth: "500px" }}>
                     <Bar
                         data={data}
                         options={{

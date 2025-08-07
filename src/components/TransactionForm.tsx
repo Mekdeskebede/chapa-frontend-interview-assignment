@@ -33,8 +33,9 @@ export default function TransactionForm() {
             const result = await initializePayment(paymentData);
             setTxRef(tx_ref);
             setFeedback(result.message || "Payment initialized!");
-        } catch (err: any) {
-            setFeedback(err.message || "Failed to initialize payment");
+        } catch (err) {
+            setFeedback("Failed to initialize payment");
+            console.log(err);
         } finally {
             setLoading(false);
             setAmount("");
@@ -48,8 +49,9 @@ export default function TransactionForm() {
         try {
             const result = await verifyTransaction(txRef);
             setVerifyResult(result.message || JSON.stringify(result));
-        } catch (err: any) {
-            setVerifyResult(err.message || "Failed to verify transaction");
+        } catch (err) {
+            setVerifyResult("Failed to verify transaction");
+            console.log(err);
         } finally {
             setLoading(false);
         }

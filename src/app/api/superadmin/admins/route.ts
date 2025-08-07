@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-let admins = [
+const admins = [
     { id: 101, name: "Admin1" },
     { id: 102, name: "Admin2" },
     { id: 103, name: "Admin3" },

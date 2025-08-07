@@ -1,8 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-    initializeTransfer,
-    checkTransferStatus,
-} from "@/services/transferService";
+import { initializeTransfer } from "@/services/transferService";
 import { fetchBanks } from "@/services/bankService";
 import Input from "@/components/Input";
 import Button from "@/components/Button";
@@ -14,15 +11,16 @@ export default function TransferSection() {
         amount: "",
         bank_code: "",
     });
-    const [banks, setBanks] = useState<any[]>([]);
+    interface Bank {
+        id: number;
+        name: string;
+        code: string;
+    }
+    const [banks, setBanks] = useState<Bank[]>([]);
     const [loadingBanks, setLoadingBanks] = useState(true);
     const [errorBanks, setErrorBanks] = useState("");
-    const [transferStatus, setTransferStatus] = useState<string>("");
-    const [transferReference, setTransferReference] = useState<string>("");
     const [statusResult, setStatusResult] = useState<string>("");
     const [loadingTransfer, setLoadingTransfer] = useState(false);
-    const [loadingStatus, setLoadingStatus] = useState(false);
-
     useEffect(() => {
         fetchBanks()
             .then((data) => {
@@ -58,7 +56,7 @@ export default function TransferSection() {
                 onSubmit={async (e) => {
                     e.preventDefault();
                     setLoadingTransfer(true);
-                    setTransferStatus("");
+
                     try {
                         const result = await initializeTransfer({
                             account_number: transferForm.account_number,
@@ -66,19 +64,16 @@ export default function TransferSection() {
                             bank_code: transferForm.bank_code,
                         });
                         const ref = result.data?.reference;
-                        setTransferStatus(
-                            "Transfer initialized! Reference: " + ref
-                        );
-                        setTransferReference(ref || "");
+
                         showToast(
                             "Transfer initialized! Reference: " + ref,
                             "success"
                         );
-                    } catch (err: any) {
-                        const msg =
-                            err?.message || "Failed to initialize transfer";
-                        setTransferStatus("Error: " + msg);
+                    } catch (err) {
+                        const msg = "Failed to initialize transfer";
+
                         showToast(msg, "error");
+                        console.log(err);
                     }
                     setLoadingTransfer(false);
                 }}
@@ -131,10 +126,10 @@ export default function TransferSection() {
                             </option>
                             {banks
                                 .filter(
-                                    (bank: any) =>
+                                    (bank: Bank) =>
                                         bank.id && !isNaN(Number(bank.id))
                                 )
-                                .map((bank: any) => (
+                                .map((bank: Bank) => (
                                     <option key={bank.id} value={bank.id}>
                                         {bank.name} ({bank.code})
                                     </option>
