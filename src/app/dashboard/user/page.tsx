@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import WalletBalance from "@/components/WalletBalance";
 import RecentTransactions from "@/components/RecentTransactions";
 import TransactionForm from "@/components/TransactionForm";
+import UserWeeklyReportChart from "@/components/UserWeeklyReportChart";
 
 export default function UserDashboard() {
     const router = useRouter();
@@ -14,15 +15,43 @@ export default function UserDashboard() {
         }
     }, [router]);
 
+    // Example user info, replace with real data as needed
+    const userInfo = {
+        name: "John Doe",
+        email: "john.doe@email.com",
+        account: "**** 1234",
+    };
+
     return (
-        <div className="min-h-screen bg-blue-100 flex items-center justify-center">
-            <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-xl border border-blue-200">
-                <h1 className="text-3xl font-bold text-blue-700 mb-6 text-center">
-                    User Dashboard
-                </h1>
-                <WalletBalance />
-                <RecentTransactions />
-                <TransactionForm />
+        <div className="flex min-h-screen">
+            {/* Main dashboard content */}
+            <div className="flex-1 flex items-center justify-center">
+                <div className="w-full p-10 flex flex-col gap-8 bg-white">
+                    {/* User Info & Wallet */}
+                    <div className="flex items-start gap-6 pb-6">
+                        <div className="">
+                            <h3 className="text-lg font-semibold text-primary mb-4">
+                                Wallet Balance
+                            </h3>
+                            <WalletBalance />
+                        </div>
+                        <div>
+                             <h3 className="text-lg font-semibold text-primary mb-4">
+                            Initiate Transaction
+                        </h3>
+                        <TransactionForm />
+                        </div>
+                        <div>
+                            <h3 className="text-lg font-semibold text-primary mb-4">
+                                Recent Transactions
+                            </h3>
+                            <RecentTransactions />
+                        </div>
+                       
+                    </div>
+                    {/* Weekly Report Chart */}
+                    <UserWeeklyReportChart />
+                </div>
             </div>
         </div>
     );

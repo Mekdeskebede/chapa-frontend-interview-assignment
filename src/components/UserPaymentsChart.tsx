@@ -51,19 +51,45 @@ export default function UserPaymentsChart() {
             {
                 label: "Total Payments",
                 data: users.map((u) => u.totalPayments),
-                backgroundColor: "#3b82f6",
+                backgroundColor: users.map((u) =>
+                    u.active ? "#22c55e" : "#ef4444"
+                ), // green for active, red for inactive
+                borderRadius: 8,
+                barPercentage: 0.7,
+                categoryPercentage: 0.6,
             },
         ],
     };
 
     return (
-        <div className="bg-white border border-blue-100 rounded-lg p-4 mb-8">
+        <div
+            className="rounded-lg flex justify-start items-start px-8"
+            style={{}}
+        >
             {loading ? (
-                <p className="text-blue-500">Loading chart...</p>
+                <p className="text-primary">Loading chart...</p>
             ) : error ? (
                 <p className="text-red-500">{error}</p>
             ) : (
-                <Bar data={data} options={options} />
+                <div style={{ width: "100%", minWidth:"500px" }}>
+                    <Bar
+                        data={data}
+                        options={{
+                            ...options,
+                            indexAxis: "x",
+                            scales: {
+                                x: {
+                                    grid: { display: false },
+                                    ticks: { font: { size: 16 } },
+                                },
+                                y: {
+                                    beginAtZero: true,
+                                    ticks: { font: { size: 16 } },
+                                },
+                            },
+                        }}
+                    />
+                </div>
             )}
         </div>
     );

@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { fetchRecentTransactions } from "@/services/paymentService";
+import {
+    ArrowDownLeft,
+    ArrowUpRight,
+    Clock,
+    CheckCircle,
+    XCircle,
+} from "lucide-react";
 
 export default function RecentTransactions() {
     const [transactions, setTransactions] = useState<any[]>([]);
@@ -19,44 +26,55 @@ export default function RecentTransactions() {
     }, []);
 
     return (
-        <div className="bg-white border border-blue-100 rounded-lg p-4 mb-6">
-            <h3 className="text-lg font-semibold text-blue-700 mb-2">
-                Recent Transactions
-            </h3>
-            {loading ? (
-                <p className="text-blue-500">Loading...</p>
-            ) : error ? (
-                <p className="text-red-500">{error}</p>
-            ) : (
-                <table className="w-full text-sm">
-                    <thead>
-                        <tr className="bg-blue-50">
-                            <th className="py-2 px-3 text-left">Date</th>
-                            <th className="py-2 px-3 text-left">Amount</th>
-                            <th className="py-2 px-3 text-left">Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {transactions.map((tx) => (
-                            <tr key={tx.id} className="border-t">
-                                <td className="py-2 px-3">{tx.date}</td>
-                                <td className="py-2 px-3">${tx.amount}</td>
-                                <td
-                                    className={`py-2 px-3 font-medium ${
-                                        tx.status === "Success"
-                                            ? "text-green-600"
-                                            : tx.status === "Pending"
-                                            ? "text-yellow-600"
-                                            : "text-red-600"
-                                    }`}
-                                >
+        <div className="mb-6 flex justify-center gap-4">
+            <div className="bg-white rounded-xl shadow p-5 ">
+                {/* <h3 className="text-base font-semibold text-gray-700 mb-3">
+                    Recent Transactions
+                </h3> */}
+                {loading ? (
+                    <p className="text-primary">Loading...</p>
+                ) : error ? (
+                    <p className="text-red-500">{error}</p>
+                ) : transactions.length === 0 ? (
+                    <p className="text-gray-400">No transactions found.</p>
+                ) : (
+                    <ul className="space-y-3 space-x-4">
+                        {transactions.slice(0, 3).map((tx) => (
+                            <li
+                                key={tx.id}
+                                className="flex items-center justify-between bg-gradient-to-r from-primary/10 to-primary/5 rounded-lg px-4 py-2 space-x-4"
+                            >
+                                <span className="flex items-center gap-2">
+                                    {tx.type === "Deposit" ? (
+                                        <ArrowDownLeft className="w-4 h-4 text-green-500" />
+                                    ) : (
+                                        <ArrowUpRight className="w-4 h-4 text-red-500" />
+                                    )}
+                                    <span className="font-medium text-gray-800">
+                                        {tx.type}
+                                    </span>
+                                </span>
+                                <span className="font-bold text-primary-dark">
+                                    {tx.amount} ETB
+                                </span>
+                                <span className="flex items-center gap-1 text-xs text-gray-500">
+                                    {tx.status === "Success" ? (
+                                        <CheckCircle className="w-4 h-4 text-green-500" />
+                                    ) : tx.status === "Pending" ? (
+                                        <Clock className="w-4 h-4 text-yellow-500" />
+                                    ) : (
+                                        <XCircle className="w-4 h-4 text-red-500" />
+                                    )}
                                     {tx.status}
-                                </td>
-                            </tr>
+                                </span>
+                                <span className="text-xs text-gray-400">
+                                    {tx.date}
+                                </span>
+                            </li>
                         ))}
-                    </tbody>
-                </table>
-            )}
+                    </ul>
+                )}
+            </div>
         </div>
     );
 }

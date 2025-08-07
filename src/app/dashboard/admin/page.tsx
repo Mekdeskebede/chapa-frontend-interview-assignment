@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import AdminUserList from "@/components/AdminUserList";
 import UserPaymentsChart from "@/components/UserPaymentsChart";
+import BankList from "@/components/BankList";
 
 export default function AdminDashboard() {
     const router = useRouter();
@@ -18,13 +19,24 @@ export default function AdminDashboard() {
     };
 
     return (
-        <div className="min-h-screen bg-indigo-50 flex items-center justify-center">
-            <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-2xl border border-indigo-200">
-                <h1 className="text-3xl font-bold text-indigo-700 mb-6 text-center">
+        <div className="min-h-screen flex flex-col bg-white">
+            <div className="w-full flex flex-col gap-8">
+                {/* <h1 className="text-3xl font-bold text-indigo-700 mb-6 text-left">
                     Admin Dashboard
-                </h1>
-                <AdminUserList onToggle={handleToggle} />
-                <UserPaymentsChart />
+                </h1> */}
+                <div className="gap-8">
+                    {/* Users Table Card */}
+                    <div className=" p-6">
+                        <AdminUserList onToggle={handleToggle} />
+                    </div>
+                </div>
+                <div className="w-full">
+                    <UserPaymentsChart />
+                </div>
+                <div>
+                    {/* Creative Supported Banks List */}
+                    <BankList />
+                </div>
             </div>
         </div>
     );

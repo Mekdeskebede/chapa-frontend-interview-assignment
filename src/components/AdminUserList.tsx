@@ -33,57 +33,60 @@ export default function AdminUserList({
 
     return (
         <div className="mb-8">
-            <h2 className="text-xl font-bold text-blue-700 mb-4">Users</h2>
+            <h2 className="text-xl font-bold text-primary mb-4">Users</h2>
             {loading ? (
                 <p className="text-blue-500">Loading...</p>
             ) : error ? (
                 <p className="text-red-500">{error}</p>
             ) : (
-                <table className="w-full text-sm border">
-                    <thead>
-                        <tr className="bg-blue-50">
-                            <th className="py-2 px-3 text-left">Name</th>
-                            <th className="py-2 px-3 text-left">Status</th>
-                            <th className="py-2 px-3 text-left">
-                                Total Payments
-                            </th>
-                            <th className="py-2 px-3 text-left">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {users.map((user) => (
-                            <tr key={user.id} className="border-t">
-                                <td className="py-2 px-3">{user.name}</td>
-                                <td
-                                    className={`py-2 px-3 font-medium ${
+                <div className="grid grid-cols-3 gap-4">
+                    {users.map((user) => (
+                        <div
+                            key={user.id}
+                            className="bg-blue-50 border border-blue-200 rounded-xl p-4 flex items-center justify-between shadow"
+                        >
+                            <div>
+                                <div className="text-lg font-semibold text-blue-800">
+                                    {user.name}
+                                </div>
+                                <div className="text-xs text-gray-500 mb-1">
+                                    Payments: ${user.totalPayments}
+                                </div>
+                                <div
+                                    className={`text-xs font-medium ${
                                         user.active
                                             ? "text-green-600"
                                             : "text-red-600"
                                     }`}
                                 >
                                     {user.active ? "Active" : "Inactive"}
-                                </td>
-                                <td className="py-2 px-3">
-                                    ${user.totalPayments}
-                                </td>
-                                <td className="py-2 px-3">
-                                    <button
-                                        className={`px-3 py-1 rounded text-white ${
+                                </div>
+                            </div>
+                            <label className="flex items-center cursor-pointer">
+                                <div className="relative">
+                                    <input
+                                        type="checkbox"
+                                        checked={user.active}
+                                        onChange={() => handleToggle(user.id)}
+                                        className="sr-only"
+                                    />
+                                    <div
+                                        className={`block w-10 h-6 rounded-full ${
                                             user.active
-                                                ? "bg-red-500 hover:bg-red-600"
-                                                : "bg-green-500 hover:bg-green-600"
+                                                ? "bg-green-400"
+                                                : "bg-gray-300"
                                         }`}
-                                        onClick={() => handleToggle(user.id)}
-                                    >
-                                        {user.active
-                                            ? "Deactivate"
-                                            : "Activate"}
-                                    </button>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
+                                    ></div>
+                                    <div
+                                        className={`dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition ${
+                                            user.active ? "translate-x-4" : ""
+                                        }`}
+                                    ></div>
+                                </div>
+                            </label>
+                        </div>
+                    ))}
+                </div>
             )}
         </div>
     );

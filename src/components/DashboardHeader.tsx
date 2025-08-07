@@ -12,15 +12,15 @@ function getInitials(name: string) {
 }
 
 const DashboardHeader: React.FC<DashboardHeaderProps> = ({ username }) => (
-    <header className="flex items-center justify-end w-full h-20 px-8 bg-white border-b shadow-sm">
+    <header className="flex items-center justify-end w-full h-14 px-8 bg-white shadow-sm">
         <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-dark)] flex items-center justify-center text-white text-xl font-bold">
+            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-dark)] flex items-center justify-center text-white text-lg">
                 {getInitials(username)}
             </div>
             <div className="flex flex-col">
-                <span className="text-base font-semibold text-gray-800">
+                {/* <span className="text-base font-semibold text-gray-800">
                     {getInitials(username)}
-                </span>
+                </span> */}
                 <span className="text-xs text-gray-500">{username}</span>
             </div>
         </div>

@@ -14,7 +14,7 @@ const Input: React.FC<InputProps> = ({ icon, className = "", ...props }) => (
         )}
         <input
             {...props}
-            className={`w-full pl-10 pr-3 py-2 border rounded-full focus:ring-0 focus:outline-none text-gray-600 text-sm`}
+            className={`${className} w-full pl-10 pr-3 py-2 border rounded-full focus:ring-0 focus:outline-none text-gray-600 text-sm`}
         />
     </div>
 );
