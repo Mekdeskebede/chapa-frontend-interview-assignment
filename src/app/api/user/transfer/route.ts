@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
     const body = await req.json();
-    const secretKey = process.env.CHAPA_SECRET_KEY;
+    // const secretKey = process.env.CHAPA_SECRET_KEY;
     const chapaRes = await fetch("https://api.chapa.co/v1/transfers", {
         method: "POST",
         headers: {
