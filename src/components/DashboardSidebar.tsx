@@ -1,9 +1,11 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import {
+  Building2,
   CreditCard,
   Home,
   LogOut,
+  Users,
 } from "lucide-react";
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
@@ -41,24 +43,24 @@ const sidebarConfig: RoleConfig = {
       path: "/dashboard/admin",
       icon: Home,
     },
-    // {
-    //   id: "users",
-    //   label: "User Management",
-    //   path: "/dashboard/admin/users",
-    //   icon: Users,
-    // },
+    {
+      id: "users",
+      label: "User Management",
+      path: "/dashboard/admin/users",
+      icon: Users,
+    },
     // {
     //   id: "payments",
     //   label: "Payment Analytics",
     //   path: "/dashboard/admin/payments",
     //   icon: BarChart3,
     // },
-    // {
-    //   id: "banks",
-    //   label: "Bank Management",
-    //   path: "/dashboard/admin/banks",
-    //   icon: Building2,
-    // },
+    {
+      id: "banks",
+      label: "Bank Management",
+      path: "/dashboard/admin/banks",
+      icon: Building2,
+    },
   ],
   superadmin: [
     {
