@@ -1,7 +1,7 @@
 "use client";
 import TransferSection from "@/components/TransferSection";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, Suspense } from "react";
 
 export default function TransferInitializationPage() {
   const router = useRouter();
@@ -14,7 +14,9 @@ export default function TransferInitializationPage() {
   return (
     <div className="min-h-[85vh] flex flex-col justify-center items-center bg-white">
       <div className="w-[50%] mt-12">
-        <TransferSection />
+        <Suspense fallback={<div>Loading...</div>}>
+          <TransferSection />
+        </Suspense>
       </div>
     </div>
   );
