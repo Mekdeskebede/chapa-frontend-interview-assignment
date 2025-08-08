@@ -73,7 +73,7 @@ npm install
 ```
 
 2. **Environment Variables**
-   Create a `.env.local` file in the root directory:
+   Create a `.env` file in the root directory:
 
 ```bash
 CHAPA_SECRET_KEY=your_chapa_secret_key_here
