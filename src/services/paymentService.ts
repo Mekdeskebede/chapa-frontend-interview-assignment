@@ -1,10 +1,8 @@
-// Fetch customer data from mock API
 export async function fetchCustomerData() {
     const res = await fetch("/api/user/customer");
     if (!res.ok) throw new Error("Failed to fetch customer data");
     return await res.json();
 }
-// Fetch wallet balance from mock API
 export async function fetchWalletBalance() {
   const res = await fetch("/api/user/wallet");
   if (!res.ok) throw new Error("Failed to fetch wallet balance");
@@ -12,14 +10,12 @@ export async function fetchWalletBalance() {
   return data.balance;
 }
 
-// Fetch recent transactions from mock API
 export async function fetchRecentTransactions() {
   const res = await fetch("/api/user/transactions");
   if (!res.ok) throw new Error("Failed to fetch transactions");
   const data = await res.json();
   return data.transactions;
 }
-// Payment data type for API integration
 interface PaymentData {
   amount: number | string;
   currency: string;
@@ -36,7 +32,6 @@ interface PaymentData {
   };
 }
 
-// Real payment service for API integration
 export async function initializePayment(paymentData: PaymentData) {
   const data = {
     amount: paymentData.amount,

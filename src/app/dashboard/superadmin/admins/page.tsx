@@ -8,8 +8,18 @@ import {
   fetchAdminList,
 } from "@/services/superAdminService";
 import AdminListShimmer from "@/components/shimmers/AdminListShimmer";
+import { useRouter } from "next/navigation";
+interface ApiAdmin {
+  id: number;
+  name: string;
+  email: string;
+  role: string;
+  status: string;
+  createdAt: string;
+}
 
 export default function AdminListPage() {
+  const router = useRouter();
   const [adminName, setAdminName] = useState("");
   const [adminEmail, setAdminEmail] = useState("");
   const [adminRole, setAdminRole] = useState("admin");
@@ -29,10 +39,16 @@ export default function AdminListPage() {
   const [errorAdmins, setErrorAdmins] = useState("");
 
   useEffect(() => {
+    const role = localStorage.getItem("role");
+    if (role !== "superadmin") {
+      router.push("/login");
+    }
+  }, []);
+
+  useEffect(() => {
     fetchAdminList()
       .then((data) => {
-        // Enhance the data with additional fields for display
-        const enhancedData = data.map((admin: any) => ({
+        const enhancedData = data.map((admin: ApiAdmin) => ({
           ...admin,
           email:
             admin.email ||

@@ -18,6 +18,40 @@ import Button from "./Button";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 
+  interface TransactionDetails {
+    status: string;
+    reference: string;
+    amount: string;
+    currency: string;
+    account_number: string;
+    bank_name: string;
+    bank_code: string;
+    created_at: string;
+    updated_at: string;
+    description: string;
+    fee: string;
+    total_amount: string;
+    account_name: string;
+    transfer_method: string;
+    mode: string;
+    chapa_transfer_id: string;
+    data: {
+      first_name: string;
+      last_name: string;
+      email: string;
+      phone_number: string;
+      type: string;
+      created_at: string;
+      updated_at: string;
+      customization: {
+        title: string;
+        description: string;
+      };
+    };
+    method: string;
+    charge: string;
+    tx_ref: string;
+}
 export default function TransactionForm() {
   const [formData, setFormData] = useState({
     amount: "",
@@ -31,7 +65,7 @@ export default function TransactionForm() {
   });
   const [txRef, setTxRef] = useState("");
   const [verifyResult, setVerifyResult] = useState("");
-  const [transactionDetails, setTransactionDetails] = useState<any>(null);
+  const [transactionDetails, setTransactionDetails] = useState<TransactionDetails | null>(null);
   const [feedback, setFeedback] = useState("");
   const [loading, setLoading] = useState(false);
   const searchParams = useSearchParams();
@@ -100,7 +134,6 @@ export default function TransactionForm() {
     setTransactionDetails(null);
     try {
       const result = await verifyTransaction(txRef);
-      console.log("----------result----------", result);
       setVerifyResult(result.message || "Transaction verified successfully");
       setTransactionDetails(result);
     } catch (err) {
@@ -419,7 +452,7 @@ export default function TransactionForm() {
 
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">
-                Email Address
+                Email Address <span className="text-xs text-red-500 font-light">(valid email address)</span>
               </label>
               <Input
                 type="email"
@@ -463,7 +496,7 @@ export default function TransactionForm() {
 
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">
-                Phone Number
+                Phone Number <span className="text-xs text-red-500 font-light">(valid phone number with country code)</span>
               </label>
               <Input
                 type="tel"
@@ -471,7 +504,7 @@ export default function TransactionForm() {
                 onChange={(e) =>
                   handleInputChange("phone_number", e.target.value)
                 }
-                placeholder="Enter phone number"
+                placeholder="+2519********"
                 icon={<Phone className="w-5 h-5" />}
                 required
               />

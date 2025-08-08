@@ -1,4 +1,4 @@
-// Fetch banks from chapa API with Bearer token
+
 export async function fetchBanks() {
     const res = await fetch("/api/banks");
     if (!res.ok) throw new Error("Failed to fetch banks");

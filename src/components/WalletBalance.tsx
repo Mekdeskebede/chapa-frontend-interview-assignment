@@ -5,9 +5,17 @@ import { CreditCard, Eye, EyeOff, Mail, Phone, MapPin } from "lucide-react";
 import Image from "next/image";
 import WalletBalanceShimmer from "@/components/shimmers/WalletBalanceShimmer";
 
+interface CustomerData {
+    avatar: string;
+    name: string;
+    email: string;
+    phone: string;
+    location: string;
+}
+
 export default function WalletBalance() {
     const [balance, setBalance] = useState<number | null>(null);
-    const [customerData, setCustomerData] = useState<any>(null);
+    const [customerData, setCustomerData] = useState<CustomerData | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
     const [showCardDetails, setShowCardDetails] = useState(false);

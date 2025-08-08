@@ -1,4 +1,3 @@
-// File: pages/login.tsx
 "use client";
 
 import { useState } from "react";
@@ -61,7 +60,6 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen flex font-sans">
-      {/* Left side: Primary color */}
       <div className="hidden md:flex flex-col justify-center items-center w-1/2 min-h-screen bg-gradient-to-br from-primary to-primary-dark text-white relative overflow-hidden">
         <div className="absolute -bottom-1/4 -left-1/6 opacity-30">
           <Image width={384} height={384} src="/circle.png" alt="Circle" className="w-96 h-96" />
@@ -80,7 +78,6 @@ export default function LoginPage() {
           </p>
         </div>
       </div>
-      {/* Right side: Login form */}
       <div className="flex flex-col justify-center items-center w-full md:w-1/2 bg-gray-50 px-8">
         <div className="w-full max-w-md">
           <div className="text-center mb-8">
