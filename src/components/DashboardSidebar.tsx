@@ -5,6 +5,8 @@ import {
   CreditCard,
   Home,
   LogOut,
+  Send,
+  Shield,
   Users,
 } from "lucide-react";
 import Link from "next/link";
@@ -49,12 +51,6 @@ const sidebarConfig: RoleConfig = {
       path: "/dashboard/admin/users",
       icon: Users,
     },
-    // {
-    //   id: "payments",
-    //   label: "Payment Analytics",
-    //   path: "/dashboard/admin/payments",
-    //   icon: BarChart3,
-    // },
     {
       id: "banks",
       label: "Bank Management",
@@ -69,42 +65,30 @@ const sidebarConfig: RoleConfig = {
       path: "/dashboard/superadmin",
       icon: Home,
     },
-    // {
-    //   id: "users",
-    //   label: "User Management",
-    //   path: "/dashboard/superadmin/users",
-    //   icon: Users,
-    // },
-    // {
-    //   id: "admins",
-    //   label: "Admin Management",
-    //   path: "/dashboard/superadmin/admins",
-    //   icon: Shield,
-    // },
-    // {
-    //   id: "payments",
-    //   label: "Payment Analytics",
-    //   path: "/dashboard/superadmin/payments",
-    //   icon: BarChart3,
-    // },
-    // {
-    //   id: "banks",
-    //   label: "Bank Management",
-    //   path: "/dashboard/superadmin/banks",
-    //   icon: Building2,
-    // },
-    // {
-    //   id: "stats",
-    //   label: "System Statistics",
-    //   path: "/dashboard/superadmin/stats",
-    //   icon: Activity,
-    // },
-    // {
-    //   id: "settings",
-    //   label: "System Settings",
-    //   path: "/dashboard/superadmin/settings",
-    //   icon: Settings,
-    // },
+    {
+      id: "users",
+      label: "User Management",
+      path: "/dashboard/superadmin/users",
+      icon: Users,
+    },
+    {
+      id: "admins",
+      label: "Admin Management",
+      path: "/dashboard/superadmin/admins",
+      icon: Shield,
+    },
+    {
+      id: "banks",
+      label: "Bank Management",
+      path: "/dashboard/superadmin/banks",
+      icon: Building2,
+    },
+    {
+      id: "initializations",
+      label: "Transfer Initialization ",
+      path: "/dashboard/superadmin/transfer-initialization",
+      icon: Send,
+    },
   ],
 };
 
