@@ -1,3 +1,9 @@
+// Fetch customer data from mock API
+export async function fetchCustomerData() {
+    const res = await fetch("/api/user/customer");
+    if (!res.ok) throw new Error("Failed to fetch customer data");
+    return await res.json();
+}
 // Fetch wallet balance from mock API
 export async function fetchWalletBalance() {
     const res = await fetch("/api/user/wallet");

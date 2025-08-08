@@ -32,13 +32,6 @@ export default function UserDashboard() {
               <RecentTransactions />
             </div>
           </div>
-          <div>
-            <h3 className="text-lg font-semibold text-primary mb-4">
-              Initiate Transaction
-            </h3>
-            <TransactionForm />
-          </div>
-          {/* Weekly Report Chart */}
         </div>
       </div>
     </div>
