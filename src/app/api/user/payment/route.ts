@@ -1,21 +1,22 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
-    const body = await req.json();
-    // const secretKey = process.env.CHAPA_SECRET_KEY;
+  const body = await req.json();
+  const secretKey = process.env.CHAPA_SECRET_KEY;
 
-    const chapaRes = await fetch(
-        "https://api.chapa.co/v1/transaction/initialize",
-        {
-            method: "POST",
-            headers: {
-                Authorization: `Bearer ${process.env.CHAPA_SECRET_KEY}`,
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(body),
-        }
-    );
+  const chapaRes = await fetch(
+    "https://api.chapa.co/v1/transaction/initialize",
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${process.env.CHAPA_SECRET_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    }
+  );
 
-    const data = await chapaRes.json();
-    return NextResponse.json(data, { status: chapaRes.status });
+  console.log("----------chapaRes----------", chapaRes);
+  const data = await chapaRes.json();
+  return NextResponse.json(data, { status: chapaRes.status });
 }
